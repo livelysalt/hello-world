@@ -1,0 +1,11 @@
+[data-app-m] {
+    overflow: hidden;
+}
+
+[data-role="close"] {
+    position: absolute;
+    z-index: 9999;
+    margin: 0;
+    left: 0.5em;
+    top: 0.5em;
+}
