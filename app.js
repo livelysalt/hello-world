@@ -1,6 +1,6 @@
 App = {
     load: [
-        'falling-blocks'
+        'listening'
     ],
 
     m: {}, // modules
@@ -19,15 +19,16 @@ App = {
 
         $.extend(App.m[id],cfg);
 
-        $('.app-m-list').append('<p><a href="#'+ id +'" data-app-m="'+ id +'" class="ui-btn ui-btn-b ui-shadow ui-corner-all ui-btn-icon-right ui-icon-carat-r">'
+        $('.app-m-list').append('<p><a href="#'+ id +'" data-app-m-target="'+ id +'" class="ui-btn ui-btn-b ui-shadow ui-corner-all ui-btn-icon-right ui-icon-carat-r">'
             + App.m[id].title
             + '</a></p>');
 
         $('body').append('<div data-role="page" id="' + id + '" data-app-m="'+ id +'">'
             + '<a href="#home" data-role="close" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-notext ui-icon-home"></a>'
+            + '<div role="view"></div>'
             + '</div>');
 
-        App.m[id].$view = $('[data-app-m="'+ id +'"]');
+        App.m[id].$view = $('[data-app-m="'+ id +'"] [role="view"]');
 
         App.m[id].init();
     },
@@ -44,6 +45,7 @@ App = {
         $('body').on('pagecontainerchange',function(e, ui){
             if (App.activeM) {
                 App.m[App.activeM].close();
+                App.m[App.activeM].$view.html('');
                 App.activeM = null;
             }
 
@@ -55,7 +57,7 @@ App = {
             }
         });
 
-    }, // init()
+    } // init()
 };
 //----------------------------------------------------------------------------------------------------------------------
 
