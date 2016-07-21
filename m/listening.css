@@ -1,3 +1,14 @@
+#listening #guide {
+    position: absolute;
+    display: block;
+    min-width: 5vw;
+    height: 10vw;
+    background-image: url('../images/listening-guide.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
 #listening .column {
     position: absolute;
     height: 100%;
@@ -26,6 +37,9 @@
     border:      1px solid hsla(0, 50%, 50%, 0.5);
     background-color:      hsla(0, 50%, 50%, 0.25);
     box-shadow: 0 5px 10px hsla(0, 50%, 50%, 0.25);
+}
+#listening .block.done:not(.selected) {
+    opacity: 0.5;
 }
 
 #listening .block.hidden {

@@ -11,6 +11,7 @@ App = {
         App.m[id] = {
             id:    id,
             title: id,
+            $m:    null,
             $view: null,
             init:  function(){},
             open:  function(){},
@@ -25,10 +26,11 @@ App = {
 
         $('body').append('<div data-role="page" id="' + id + '" data-app-m="'+ id +'">'
             + '<a href="#home" data-role="close" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-notext ui-icon-home"></a>'
-            + '<div role="view"></div>'
+            + '<div data-role="view"></div>'
             + '</div>');
 
-        App.m[id].$view = $('[data-app-m="'+ id +'"] [role="view"]');
+        App.m[id].$m    = $('[data-app-m="'+ id +'"]');
+        App.m[id].$view = App.m[id].$m.find('[data-role="view"]');
 
         App.m[id].init();
     },
