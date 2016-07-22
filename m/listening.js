@@ -41,6 +41,9 @@ App.new('listening',{
         this.sounds.no     = new buzz.sound("sounds/no-buzz.mp3");
         this.sounds.bounce = new buzz.sound("sounds/bounce.mp3");
 
+        this.$view.append('<div data-role="modal"></div>');
+        this.$modal = $('[data-role="modal"]');
+
         this.$m.append('<div id="guide"></div>');
         this.$guide = $('#guide');
 
@@ -51,7 +54,9 @@ App.new('listening',{
         }
 
         var $this = this;
-        this.$view.on('click', '.block:not(.done)', function() {
+        this.$view.on('click', '[data-role="modal"] [data-state]', function() {
+            $this.onModalClick($(this).attr('data-state'));
+        }).on('click', '.block:not(.done)', function() {
             $this.onBlockClick($(this));
         });
     }, // init()
@@ -82,13 +87,11 @@ App.new('listening',{
         var src = this.tts.url("Hi, I'm Bunny! Listen carefully while I say a number, so you can click the right button when it appears! Are you ready?",{r:0});
 
         var $this = this;
-        this.intro = new buzz.sound(src).play().bind('ended',function(){
+        this.sounds.intro = new buzz.sound(src).play().bind('ended',function(){
             $this.run();
         });
 
-        //window.location('#dialog');
-
-        //this.$view.append('<div class="ui-btn ui-shadow">Start</div>');
+        this.$modal.show().html('<div data-state="intro" class="ui-btn ui-shadow">Start</div>');
     }, // introduction()
 
     //------------------------------------------------------------------------------------------------------------------
@@ -132,6 +135,17 @@ App.new('listening',{
 
     //------------------------------------------------------------------------------------------------------------------
 
+    onModalClick: function(state) {
+        if (state == 'intro') {
+            this.sounds.intro.stop();
+            this.run();
+        }
+        // clear modal
+        this.$modal.hide();
+    }, // onModalClick()
+
+    //------------------------------------------------------------------------------------------------------------------
+
     onBlockClick: function($b) {
         this.$view.find('.block:not(.done)').addClass('done');
 
@@ -140,7 +154,10 @@ App.new('listening',{
         $b.addClass('selected '+ (yes ? 'yes' : 'no'));
 
         if (yes) {
-            this.advance();
+            if (this.advance() == 'complete') {
+                this.clear();
+                return;
+            }
         } else {
             this.sounds.no.play();
         }
@@ -162,6 +179,7 @@ App.new('listening',{
 
         if (this.step == this.steps) {
             this.sounds.yes.play();
+            return 'complete';
         }
 
     }, // advance

@@ -27,21 +27,24 @@
     font-weight: bold;
     font-size: 1.5em;
     cursor: pointer;
-}
-#listening .block.yes {
-    border:      1px solid hsla(120, 50%, 50%, 0.5);
-    background-color:      hsla(120, 50%, 50%, 0.25);
-    box-shadow: 0 5px 10px hsla(120, 50%, 50%, 0.25);
-}
-#listening .block.no {
-    border:      1px solid hsla(0, 50%, 50%, 0.5);
-    background-color:      hsla(0, 50%, 50%, 0.25);
-    box-shadow: 0 5px 10px hsla(0, 50%, 50%, 0.25);
-}
-#listening .block.done:not(.selected) {
-    opacity: 0.5;
-}
-
-#listening .block.hidden {
-    display: none;
-}
+    transition: transform 1s ease;
+    }
+    #listening .block.hidden {
+        display: none;
+        }
+    #listening .block.yes {
+        border:      1px solid hsla(120, 50%, 50%, 0.5);
+        background-color:      hsla(120, 50%, 50%, 0.25);
+        box-shadow: 0 5px 10px hsla(120, 50%, 50%, 0.25);
+        }
+    #listening .block.no {
+        border:      1px solid hsla(0, 50%, 50%, 0.5);
+        background-color:      hsla(0, 50%, 50%, 0.25);
+        box-shadow: 0 5px 10px hsla(0, 50%, 50%, 0.25);
+        }
+    #listening .block.done.i {
+        transform: scale(2);
+        }
+    #listening .block.done:not(.i) {
+        transform: scale(0);
+        }
