@@ -69,7 +69,7 @@ App.new('listening',{
         var btime = 2;
 
         var $this = this;
-        this.$guide.animate({bottom:0},btime * 1000,'easeOutBounce',function(){
+        this.$guide.css({bottom:'100%',left:'0%'}).animate({bottom:0},btime * 1000,'easeOutBounce',function(){
             $this.introduction();
         });
 
@@ -84,11 +84,12 @@ App.new('listening',{
 
     introduction: function() {
 
-        var src = this.tts.url("Hi, I'm Bunny! Listen carefully while I say a number, so you can click the right button when it appears! Are you ready?",{r:0});
+        var src = this.tts.url("Hi, I'm Bunny! Listen carefully while I say a number, so you can click the right button when it appears! Are you ready?",
+            {r:0});
 
         var $this = this;
         this.sounds.intro = new buzz.sound(src).play().bind('ended',function(){
-            $this.run();
+//            $this.run();
         });
 
         this.$modal.show().html('<div data-state="intro" class="ui-btn ui-shadow">Start</div>');
