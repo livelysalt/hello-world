@@ -7,6 +7,30 @@ App = {
 
     activeM: null,
 
+    sayCfg: {
+        domain: '//api.voicerss.org',
+        key:    'd9d0d46d0c9c448baf43dc831fc7eca8',
+        hl:     'en-us',
+        r:      -3
+    },
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    say: function(text,cfg) {
+        if (typeof cfg != 'object') cfg = {};
+        cfg = $.extend({}, this.sayCfg, cfg);
+        var src = this.domain +'/?key='+ cfg.key +'&hl='+ cfg.hl +'&r='+ cfg.r +'&src='+ text;
+
+        if (Howl) {
+            return new Howl({
+                src: [src],
+                format: ['mp3']
+            });
+        }
+    }, // say()
+
+    //------------------------------------------------------------------------------------------------------------------
+
     new: function(id,cfg){
         App.m[id] = {
             id:    id,
@@ -33,7 +57,9 @@ App = {
         App.m[id].$view = App.m[id].$m.find('[data-role="view"]');
 
         App.m[id].init();
-    },
+    }, // new()
+
+    //------------------------------------------------------------------------------------------------------------------
 
     init: function(){
 

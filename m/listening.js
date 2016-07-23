@@ -73,26 +73,25 @@ App.new('listening',{
             $this.introduction();
         });
 
+        // sound delay needs to coincide with easing above
         this.timer = window.setTimeout(function(){
             $this.sounds.bounce.play();
         }, btime * 400);
-
-        //this.run();
     }, // open()
 
     //------------------------------------------------------------------------------------------------------------------
 
     introduction: function() {
 
-        var src = this.tts.url("Hi, I'm Bunny! Listen carefully while I say a number, so you can click the right button when it appears! Are you ready?",
+        this.sounds.intro = App.say("Hi, I'm Bunny! Listen carefully while I say a number, so you can click the right button when it appears! Are you ready?",
+            {r:0}).play();
+
+        /*var src = this.tts.url("Hi, I'm Bunny! Listen carefully while I say a number, so you can click the right button when it appears! Are you ready?",
             {r:0});
 
-        var $this = this;
-        this.sounds.intro = new buzz.sound(src).play().bind('ended',function(){
-//            $this.run();
-        });
+        this.sounds.intro = new buzz.sound(src).play();*/
 
-        this.$modal.show().html('<div data-state="intro" class="ui-btn ui-shadow">Start</div>');
+        this.$modal.show().html('<div data-state="intro" class="ui-btn ui-corner-all ui-shadow">Start</div>');
     }, // introduction()
 
     //------------------------------------------------------------------------------------------------------------------
