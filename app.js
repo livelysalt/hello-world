@@ -19,7 +19,7 @@ App = {
     say: function(text,cfg) {
         if (typeof cfg != 'object') cfg = {};
         cfg = $.extend({}, this.sayCfg, cfg);
-        var src = this.domain +'/?key='+ cfg.key +'&hl='+ cfg.hl +'&r='+ cfg.r +'&src='+ text;
+        var src = cfg.domain +'/?key='+ cfg.key +'&hl='+ cfg.hl +'&r='+ cfg.r +'&src='+ text;
 
         if (Howl) {
             return new Howl({

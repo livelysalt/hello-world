@@ -28,7 +28,7 @@ App.new('listening',{
         url: function(text,cfg) {
             if (typeof cfg != 'object') cfg = {};
             cfg = $.extend({}, this, cfg);
-            return this.domain +'/?key='+ cfg.key +'&hl='+ cfg.hl +'&r='+ cfg.r +'&src='+ text;
+            return cfg.domain +'/?key='+ cfg.key +'&hl='+ cfg.hl +'&r='+ cfg.r +'&src='+ text;
         }
     },
 
