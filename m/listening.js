@@ -84,12 +84,9 @@ App.new('listening',{
     introduction: function() {
 
         this.sounds.intro = App.say("Hi, I'm Bunny! Listen carefully while I say a number, so you can click the right button when it appears! Are you ready?",
-            {r:0}).play();
-
-        /*var src = this.tts.url("Hi, I'm Bunny! Listen carefully while I say a number, so you can click the right button when it appears! Are you ready?",
             {r:0});
 
-        this.sounds.intro = new buzz.sound(src).play();*/
+        this.sounds.intro.play();
 
         this.$modal.show().html('<div data-state="intro" class="ui-btn ui-corner-all ui-shadow">Start</div>');
     }, // introduction()
